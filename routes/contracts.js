@@ -1,5 +1,5 @@
 const { Router } = require("express");
-const ContractModel = require("../models/Notes.model");
+const ContractModel = require("../models/Contracts.model");
 const contractsRouter = Router();
 
 
@@ -10,6 +10,18 @@ contractsRouter.get('/contracts', async (req, res) => {
       res.status(200).json(contracts);
     } catch (err) {
       res.status(500).json({ message: err.message });
+    }
+  });
+  
+
+  // create a new contract
+  contractsRouter.post('/contracts', async (req, res) => {
+    const contract = new ContractModel(req.body);
+    try {
+      const newContract = await contract.save();
+      res.status(201).json(newContract);
+    } catch (err) {
+      res.status(400).json({ message: err.message });
     }
   });
   
@@ -26,17 +38,7 @@ contractsRouter.get('/contracts', async (req, res) => {
     }
   });
   
-  // create a new contract
-  contractsRouter.post('/contracts', async (req, res) => {
-    const contract = new ContractModel(req.body);
-    try {
-      const newContract = await contract.save();
-      res.status(201).json(newContract);
-    } catch (err) {
-      res.status(400).json({ message: err.message });
-    }
-  });
-  
+
   // update a contract
   contractsRouter.patch('/contracts/:id', async (req, res) => {
     try {

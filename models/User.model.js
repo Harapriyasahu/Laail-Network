@@ -7,3 +7,7 @@ const userSchema = mongoose.Schema({
 const UserModel = mongoose.model("user", userSchema)
 module.exports = UserModel;
 
+// {
+//     "name": "Samsung",
+//      "mobileNumber" : "5676543"
+//   }

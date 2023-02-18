@@ -8,7 +8,9 @@ const userRouter = require("./routes/user")
 app.use(express.json())
 app.use("/contracts", contractsRouter)
 app.use("/user", userRouter)
-
+app.get("/",(req,res)=>{
+    res.send("Hii MongoDB server")
+})
 
 app.listen(7000, async() => {
     try{
